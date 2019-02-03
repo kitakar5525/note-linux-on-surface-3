@@ -1,5 +1,7 @@
 # Notes to use Linux on Surface 3
 
+- see also: [kitakar5525/note-linux-on-surface-book-1](https://github.com/kitakar5525/note-linux-on-surface-book-1#kernel-parameters-i-pass-to-bootloader)
+
 - What is working NOW which was not before
   - S0ix state
     - We can now go into S0ix after kernel 4.20 !

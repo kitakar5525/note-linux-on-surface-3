@@ -48,12 +48,15 @@ My Surface 3 is also affected by this problem. "OEMB" problem is described on:
 To enable audio on such devices, you need to apply a patch like this:
 
 ```diff
---- a/sound/soc/codecs/rt5645.c	2018-12-24 08:55:59.000000000 +0900
-+++ b/sound/soc/codecs/rt5645.c	2019-01-03 01:53:54.740226214 +0900
-@@ -3702,6 +3702,14 @@ static const struct dmi_system_id dmi_pl
+diff --git a/sound/soc/codecs/rt5645.c b/sound/soc/codecs/rt5645.c
+index be67468..70cf5dd 100644
+--- a/sound/soc/codecs/rt5645.c
++++ b/sound/soc/codecs/rt5645.c
+@@ -3701,6 +3701,14 @@ static const struct dmi_system_id dmi_platform_data[] = {
+ 		},
  		.driver_data = (void *)&intel_braswell_platform_data,
  	},
- 	{
++	{
 +		.ident = "Microsoft Surface 3",
 +		.matches = {
 +			DMI_MATCH(DMI_SYS_VENDOR, "OEMB"),
@@ -61,12 +64,11 @@ To enable audio on such devices, you need to apply a patch like this:
 +		},
 +		.driver_data = (void *)&intel_braswell_platform_data,
 +	},
-+	{
+ 	{
  		/*
  		 * Match for the GPDwin which unfortunately uses somewhat
- 		 * generic dmi strings, which is why we test for 4 strings.
 diff --git a/sound/soc/intel/common/soc-acpi-intel-cht-match.c b/sound/soc/intel/common/soc-acpi-intel-cht-match.c
-index ad1eb2d..dfac9ef 100644
+index 91bb99b..b0e2b0d 100644
 --- a/sound/soc/intel/common/soc-acpi-intel-cht-match.c
 +++ b/sound/soc/intel/common/soc-acpi-intel-cht-match.c
 @@ -36,6 +36,13 @@ static const struct dmi_system_id cht_table[] = {

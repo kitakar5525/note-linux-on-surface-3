@@ -21,7 +21,7 @@
 
 - What is working IF you apply patch(es) to kernel
   - Battery status reading
-    - [[v3] platform/x86: surface3_power: MSHW0011 rev-eng implementation - Patchwork](https://patchwork.kernel.org/patch/10584079/). On above kernel 4.20, maybe you can also build only this module, not whole kernel (not tested).
+    - [[v3] platform/x86: surface3_power: MSHW0011 rev-eng implementation - Patchwork](https://patchwork.kernel.org/patch/10584079/). On above kernel 4.20, maybe you can also build only this module, not whole kernel (not tested). Or, 
     - use jakeday [repository](https://github.com/jakeday/linux-surface)
 
 - What is NOT working

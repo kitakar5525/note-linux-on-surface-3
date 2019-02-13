@@ -37,8 +37,11 @@
       - [pwm: lpss: Add ACPI HID for second PWM controller on Cherry Trail dev… · torvalds/linux@1688c87](https://github.com/torvalds/linux/commit/1688c8717118f37191d824862a006c8373d261de)
       - [platform/x86: Add Intel AtomISP2 dummy / power-management driver · torvalds/linux@49ad712](https://github.com/torvalds/linux/commit/49ad712afa88c502831d37f7089d98eac441fb80)
 
-- `Display` section on GNOME settings
-  - Now internal display appears on GNOME settings after latest kernel 4.19.x
+- Internal display not configurable except `xrandr`.
+
+  It did show up on `xrandr`, but not on GNOME settings `Display` section and even Chromium OS could not use internal display before.
+
+  Now it appears on GNOME settings `Display` section, exactly after 4.19.13. Chromium OS can now use internal display correctly. I am not sure what commit fixed this issue; if you know, let me know.
 
 ### What is working IF you apply patch(es) to kernel
 - Battery status reading

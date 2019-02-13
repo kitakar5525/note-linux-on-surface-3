@@ -41,7 +41,7 @@
 
   It did show up on `xrandr`, but not on GNOME settings `Display` section and even Chromium OS could not use internal display before.
 
-  Now it appears on GNOME settings `Display` section, exactly after 4.19.13. Chromium OS can now use internal display correctly. I am not sure what commit fixed this issue; if you know, let me know.
+  Now it appears on GNOME settings `Display` section, exactly after 4.19.13. Chromium OS can now use it correctly. I am not sure what commit fixed this issue; if you know, let me know.
 
 ### What is working IF you apply patch(es) to kernel
 - Battery status reading

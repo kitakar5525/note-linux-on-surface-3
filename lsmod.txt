@@ -1,0 +1,162 @@
+Module                  Size  Used by
+quota_v2               16384  4
+quota_tree             20480  1 quota_v2
+fuse                  131072  5
+input_leds             16384  0
+hid_multitouch         28672  0
+cmac                   16384  1
+rfcomm                 86016  12
+bnep                   28672  2
+btusb                  57344  0
+btrtl                  20480  1 btusb
+btbcm                  16384  1 btusb
+btintel                28672  1 btusb
+bluetooth             651264  41 btrtl,btintel,btbcm,bnep,btusb,rfcomm
+sd_mod                 57344  5
+uas                    28672  0
+ecdh_generic           24576  2 bluetooth
+cdc_mbim               20480  0
+cdc_wdm                28672  1 cdc_mbim
+cdc_ncm                40960  1 cdc_mbim
+usbnet                 49152  2 cdc_mbim,cdc_ncm
+mii                    16384  1 usbnet
+usbhid                 61440  0
+snd_hdmi_lpe_audio     32768  1
+i915                 2117632  10
+mwlwifi               192512  0
+intel_rapl             28672  0
+kvmgt                  32768  0
+intel_powerclamp       20480  0
+vfio_mdev              16384  0
+kvm_intel             245760  0
+mdev                   24576  2 kvmgt,vfio_mdev
+vfio_iommu_type1       32768  0
+hid_sensor_als         20480  1
+hid_sensor_rotation    20480  0
+mac80211              946176  1 mwlwifi
+hid_sensor_gyro_3d     20480  0
+vfio                   36864  3 kvmgt,vfio_mdev,vfio_iommu_type1
+hid_sensor_accel_3d    20480  1
+hid_sensor_trigger     20480  8 hid_sensor_gyro_3d,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_rotation
+industrialio_triggered_buffer    16384  4 hid_sensor_gyro_3d,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_rotation
+kfifo_buf              16384  1 industrialio_triggered_buffer
+snd_soc_sst_cht_bsw_rt5645    24576  2
+snd_soc_rt5670        135168  0
+hid_sensor_iio_common    20480  5 hid_sensor_gyro_3d,hid_sensor_trigger,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_rotation
+industrialio           86016  9 industrialio_triggered_buffer,hid_sensor_gyro_3d,hid_sensor_trigger,kfifo_buf,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_rotation
+kvm                   741376  2 kvmgt,kvm_intel
+nls_iso8859_1          16384  2
+nls_cp437              20480  2
+vfat                   20480  2
+fat                    81920  1 vfat
+mwifiex_pcie           45056  0
+mwifiex               335872  1 mwifiex_pcie
+ofpart                 20480  0
+cmdlinepart            16384  0
+joydev                 28672  0
+mousedev               24576  0
+intel_spi_platform     16384  0
+intel_spi              24576  1 intel_spi_platform
+crct10dif_pclmul       16384  1
+hid_sensor_hub         24576  6 hid_sensor_gyro_3d,hid_sensor_trigger,hid_sensor_iio_common,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_rotation
+crc32_pclmul           16384  0
+spi_nor                45056  1 intel_spi
+irqbypass              16384  1 kvm
+i2c_algo_bit           16384  1 i915
+hid_generic            16384  0
+ghash_clmulni_intel    16384  0
+mtd                    73728  5 cmdlinepart,intel_spi,ofpart
+iTCO_wdt               16384  0
+iTCO_vendor_support    16384  1 iTCO_wdt
+drm_kms_helper        208896  1 i915
+gpio_keys              20480  0
+battery                24576  0
+cfg80211              778240  3 mwifiex,mac80211,mwlwifi
+snd_intel_sst_acpi     20480  1
+aesni_intel           200704  2
+snd_intel_sst_core     65536  1 snd_intel_sst_acpi
+drm                   499712  5 drm_kms_helper,i915
+snd_soc_sst_atom_hifi2_platform   106496  2 snd_intel_sst_core
+snd_soc_rt5645        151552  2 snd_soc_sst_cht_bsw_rt5645
+aes_x86_64             20480  1 aesni_intel
+snd_soc_rt5640        131072  0
+snd_soc_acpi_intel_match    24576  1 snd_intel_sst_acpi
+crypto_simd            16384  1 aesni_intel
+cryptd                 28672  3 crypto_simd,ghash_clmulni_intel,aesni_intel
+snd_soc_acpi           16384  3 snd_soc_acpi_intel_match,snd_intel_sst_acpi,snd_soc_sst_cht_bsw_rt5645
+glue_helper            16384  1 aesni_intel
+snd_soc_rl6231         20480  3 snd_soc_rt5670,snd_soc_rt5640,snd_soc_rt5645
+snd_soc_core          278528  5 snd_soc_rt5670,snd_soc_rt5640,snd_soc_sst_atom_hifi2_platform,snd_soc_rt5645,snd_soc_sst_cht_bsw_rt5645
+intel_cstate           16384  0
+pcspkr                 16384  0
+intel_gtt              24576  1 i915
+agpgart                53248  2 intel_gtt,drm
+syscopyarea            16384  1 drm_kms_helper
+sysfillrect            16384  1 drm_kms_helper
+rfkill                 28672  7 bluetooth,cfg80211
+sysimgblt              16384  1 drm_kms_helper
+snd_compress           28672  1 snd_soc_core
+fb_sys_fops            16384  1 drm_kms_helper
+mei_txe                28672  0
+ac97_bus               16384  1 snd_soc_core
+snd_pcm_dmaengine      16384  1 snd_soc_core
+intel_xhci_usb_role_switch    16384  0
+snd_pcm               135168  8 snd_soc_rt5670,snd_soc_rt5640,snd_hdmi_lpe_audio,snd_soc_sst_atom_hifi2_platform,snd_soc_core,snd_soc_rt5645,snd_soc_sst_cht_bsw_rt5645,snd_pcm_dmaengine
+mei                   114688  1 mei_txe
+roles                  16384  1 intel_xhci_usb_role_switch
+processor_thermal_device    16384  0
+lpc_ich                28672  0
+intel_soc_dts_iosf     20480  1 processor_thermal_device
+intel_atomisp2_pm      16384  0
+snd_timer              40960  1 snd_pcm
+tpm_crb                20480  0
+soc_button_array       20480  0
+surface3_spi           20480  0
+tpm_tis                16384  0
+snd                   102400  12 snd_timer,snd_compress,snd_hdmi_lpe_audio,snd_soc_sst_atom_hifi2_platform,snd_soc_core,snd_pcm
+evdev                  24576  18
+mac_hid                16384  0
+tpm_tis_core           24576  1 tpm_tis
+i2c_hid                32768  0
+tpm                    69632  3 tpm_tis,tpm_crb,tpm_tis_core
+soundcore              16384  1 snd
+hid                   143360  5 i2c_hid,usbhid,hid_multitouch,hid_sensor_hub,hid_generic
+rng_core               16384  1 tpm
+surface3_button        20480  0
+8250_dw                28672  0
+dptf_power             16384  0
+pwm_lpss_platform      16384  0
+surfacepro3_button     20480  0
+wmi                    32768  0
+pwm_lpss               16384  1 pwm_lpss_platform
+int3400_thermal        20480  0
+surface3_power         16384  0
+spi_pxa2xx_platform    32768  0
+int3403_thermal        16384  0
+intel_int0002_vgpio    16384  1
+pcc_cpufreq            20480  0
+int340x_thermal_zone    16384  2 int3403_thermal,processor_thermal_device
+acpi_thermal_rel       16384  1 int3400_thermal
+ac                     16384  0
+coretemp               20480  0
+msr                    16384  0
+sg                     40960  0
+crypto_user            20480  0
+acpi_call              16384  0
+ip_tables              32768  0
+x_tables               49152  1 ip_tables
+usb_storage            73728  5 uas
+scsi_mod              258048  4 sd_mod,usb_storage,uas,sg
+ext4                  749568  7
+crc32c_generic         16384  0
+crc16                  16384  2 bluetooth,ext4
+mbcache                16384  1 ext4
+jbd2                  131072  1 ext4
+fscrypto               32768  1 ext4
+mmc_block              49152  7
+crc32c_intel           24576  12
+xhci_pci               20480  0
+xhci_hcd              262144  1 xhci_pci
+sdhci_acpi             24576  0
+sdhci                  65536  1 sdhci_acpi
+mmc_core              180224  3 sdhci,mmc_block,sdhci_acpi

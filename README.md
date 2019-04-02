@@ -2,6 +2,9 @@
 
 - see also: [kitakar5525/note-linux-on-surface-book-1](https://github.com/kitakar5525/note-linux-on-surface-book-1#kernel-parameters-i-pass-to-bootloader)
 
+Actual patches are here:
+- [kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches)
+
 <!-- TOC -->
 
 - [Notes to use Linux on Surface 3](#notes-to-use-linux-on-surface-3)

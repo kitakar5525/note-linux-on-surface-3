@@ -12,6 +12,7 @@ Actual patches are here:
         - [What is working NOW which was not before](#what-is-working-now-which-was-not-before)
         - [What is working IF you apply patch(es) to kernel](#what-is-working-if-you-apply-patches-to-kernel)
         - [What is NOT working](#what-is-not-working)
+            - [Touchscreen is not stable](#touchscreen-is-not-stable)
     - [Kernel parameters I pass to bootloader](#kernel-parameters-i-pass-to-bootloader)
     - ["OEMB" problem](#oemb-problem)
 
@@ -54,12 +55,22 @@ Actual patches are here:
 ### What is NOT working
 
 - Cameras
-- Touch input crashes after s2idle
-  ```bash
-  kern  :err   : [  +0.203408] Surface3-spi spi-MSHW0037:00: SPI transfer timed out
-  ```
 - Wi-Fi power_save
-  - We need to disable power_save for stability for now. If we disable power_save, the stability is enough for daily usage. Disabling power_save is included in wifi patch of jakeday repository.
+  - We need to disable power_save for stability for now. If we disable power_save, the stability is enough for daily usage (still sometimes drops wifi, though). Disabling power_save is included in wifi patch of jakeday repository.
+
+#### Touchscreen is not stable
+
+On kernel 4.19.y, touchscreen is working unless you put your Surface 3 into suspend (s2idle).
+After s2idle:
+```bash
+kern  :err   : [  +0.203408] Surface3-spi spi-MSHW0037:00: SPI transfer timed out
+```
+
+On kernel 5.1.y (I don't know about 5.0.y), touchscreen is not working even right after boot:
+```bash
+kern  :err   : [  +0.203592] Surface3-spi spi-MSHW0037:00: SPI transfer timed out
+kern  :err   : [  +0.000173] spi_master spi1: failed to transfer one message from queue
+```
 
 ## Kernel parameters I pass to bootloader
   - i915.enable_psr=1

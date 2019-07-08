@@ -10,6 +10,7 @@ Actual patches are here:
 - [Notes to use Linux on Surface 3](#notes-to-use-linux-on-surface-3)
     - [Working status](#working-status)
         - [What is working NOW which was not before](#what-is-working-now-which-was-not-before)
+            - [S0ix state](#s0ix-state)
         - [What is working IF you apply patch(es) to kernel](#what-is-working-if-you-apply-patches-to-kernel)
         - [What is NOT working](#what-is-not-working)
             - [Touchscreen is not stable](#touchscreen-is-not-stable)
@@ -22,30 +23,34 @@ Actual patches are here:
 
 ### What is working NOW which was not before
 
-- S0ix state
-  - We can now go into S0ix after kernel 4.20 !
-  ```bash
-  /sys/devices/system/cpu/cpuidle/low_power_idle_cpu_residency_us
-  30
-
-  /sys/kernel/debug/pmc_atom/sleep_state
-  S0IR Residency:32us
-  S0I1 Residency:11456us
-  S0I2 Residency:96us
-  S0I3 Residency:7991840us
-  S0   Residency:135887456us
-  ```
-
-  - [196861 – S0ix enablement - Asus E200HA (Atom x5-Z8300, Cherrytrail)](https://bugzilla.kernel.org/show_bug.cgi?id=196861#c8)
-    - It seems that if you want to achieve s0ix on 4.19 LTS, you need these two patches:
-      - [pwm: lpss: Add ACPI HID for second PWM controller on Cherry Trail dev… · torvalds/linux@1688c87](https://github.com/torvalds/linux/commit/1688c8717118f37191d824862a006c8373d261de)
-      - [platform/x86: Add Intel AtomISP2 dummy / power-management driver · torvalds/linux@49ad712](https://github.com/torvalds/linux/commit/49ad712afa88c502831d37f7089d98eac441fb80)
-
 - Internal display not configurable except `xrandr`.
 
   It did show up on `xrandr`, but not on GNOME settings `Display` section and even Chromium OS could not use internal display before.
 
   Now it appears on GNOME settings `Display` section, exactly after 4.19.13. Chromium OS can now use it correctly. I am not sure what commit fixed this issue; if you know, let me know.
+
+#### S0ix state
+
+We can now go into S0ix state after kernel 4.20 on suspend (s2idle)!
+This means s2idle is now much more power-efficient than before.
+```bash
+/sys/devices/system/cpu/cpuidle/low_power_idle_cpu_residency_us
+30
+
+/sys/kernel/debug/pmc_atom/sleep_state
+S0IR Residency:32us
+S0I1 Residency:11456us
+S0I2 Residency:96us
+S0I3 Residency:7991840us
+S0   Residency:135887456us
+```
+
+It seems that if you want to achieve s0ix on 4.19 LTS, you need these two patches:
+- [pwm: lpss: Add ACPI HID for second PWM controller on Cherry Trail dev… · torvalds/linux@1688c87](https://github.com/torvalds/linux/commit/1688c8717118f37191d824862a006c8373d261de)
+- [platform/x86: Add Intel AtomISP2 dummy / power-management driver · torvalds/linux@49ad712](https://github.com/torvalds/linux/commit/49ad712afa88c502831d37f7089d98eac441fb80)
+
+References:
+- [196861 – S0ix enablement - Asus E200HA (Atom x5-Z8300, Cherrytrail)](https://bugzilla.kernel.org/show_bug.cgi?id=196861#c8)
 
 ### What is working IF you apply patch(es) to kernel
 - Battery status reading

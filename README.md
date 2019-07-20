@@ -105,4 +105,4 @@ See this Android-x86 [kernel commit](https://ja.osdn.net/projects/android-x86/sc
 You also need to apply a similar patch to `surface3-wmi.c`
 Have a look at my patch set.
 - [linux-surface-patches/Sound-add-DMI_MATCH-OEMB-for-broken-DMI-Surface-3.patch at v2.6 · kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches/blob/v2.6/patch-5.2/5525/Sound-add-DMI_MATCH-OEMB-for-broken-DMI-Surface-3.patch)
-- [linux-surface-patches/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch at master · kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches/blob/master/patch-5.2/5525/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch)
+- [linux-surface-patches/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch at master · kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches/blob/v2.6/patch-5.2/5525/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch)

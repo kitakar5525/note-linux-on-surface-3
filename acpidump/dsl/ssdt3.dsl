@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20190329 (64-bit version)
+ * AML/ASL+ Disassembler version 20190703 (64-bit version)
  * Copyright (c) 2000 - 2019 Intel Corporation
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of ssdt3.dat, Tue Apr  2 02:45:24 2019
+ * Disassembly of ssdt3.dat, Sun Jul 21 01:33:52 2019
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -21,8 +21,8 @@
 DefinitionBlock ("", "SSDT", 1, "CpuDpf", "CpuDptf", 0x00001000)
 {
     /*
-     * iASL Warning: There was 1 external control method found during
-     * disassembly, but only 0 were resolved (1 unresolved). Additional
+     * iASL Warning: There were 4 external control methods found during
+     * disassembly, but only 3 were resolved (1 unresolved). Additional
      * ACPI tables may be required to properly disassemble the code. This
      * resulting disassembler output file may not compile because the
      * disassembler did not know how many arguments to assign to the
@@ -50,10 +50,10 @@ DefinitionBlock ("", "SSDT", 1, "CpuDpf", "CpuDptf", 0x00001000)
     External (_PR_.CPU0, UnknownObj)
     External (_PR_.CPU0._PPC, IntObj)
     External (_PR_.CPU0._PSS, IntObj)
-    External (_PR_.CPU0._PTC, IntObj)
-    External (_PR_.CPU0._TDL, IntObj)
+    External (_PR_.CPU0._PTC, MethodObj)    // 0 Arguments
+    External (_PR_.CPU0._TDL, MethodObj)    // 0 Arguments
     External (_PR_.CPU0._TPC, IntObj)
-    External (_PR_.CPU0._TSD, IntObj)
+    External (_PR_.CPU0._TSD, MethodObj)    // 0 Arguments
     External (_PR_.CPU1, UnknownObj)
     External (_PR_.CPU2, UnknownObj)
     External (_PR_.CPU3, UnknownObj)
@@ -300,7 +300,7 @@ DefinitionBlock ("", "SSDT", 1, "CpuDpf", "CpuDptf", 0x00001000)
                 Debug = "cpudptf: _PTC Called"
                 If (CondRefOf (\_PR.CPU0._PTC, Local0))
                 {
-                    Return (\_PR.CPU0._PTC) /* External reference */
+                    Return (\_PR.CPU0._PTC ())
                 }
                 Else
                 {
@@ -321,7 +321,7 @@ DefinitionBlock ("", "SSDT", 1, "CpuDpf", "CpuDptf", 0x00001000)
                 Debug = "cpudptf: _TSD Called"
                 If (CondRefOf (\_PR.CPU0._TSD, Local0))
                 {
-                    Return (\_PR.CPU0._TSD) /* External reference */
+                    Return (\_PR.CPU0._TSD ())
                 }
                 Else
                 {
@@ -342,7 +342,7 @@ DefinitionBlock ("", "SSDT", 1, "CpuDpf", "CpuDptf", 0x00001000)
                 Debug = "cpudptf: _TDL Called"
                 If (CondRefOf (\_PR.CPU0._TDL, Local0))
                 {
-                    Return (\_PR.CPU0._TDL) /* External reference */
+                    Return (\_PR.CPU0._TDL ())
                 }
                 Else
                 {

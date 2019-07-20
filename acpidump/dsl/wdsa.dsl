@@ -1,9 +1,9 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20190329 (64-bit version)
+ * AML/ASL+ Disassembler version 20190703 (64-bit version)
  * Copyright (c) 2000 - 2019 Intel Corporation
  * 
- * Disassembly of wdsa.dat, Tue Apr  2 02:45:24 2019
+ * Disassembly of wdsa.dat, Sun Jul 21 01:33:52 2019
  *
  * ACPI Data Table [WDSA]
  *

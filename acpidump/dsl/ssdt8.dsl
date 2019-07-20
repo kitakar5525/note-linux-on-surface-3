@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20190329 (64-bit version)
+ * AML/ASL+ Disassembler version 20190703 (64-bit version)
  * Copyright (c) 2000 - 2019 Intel Corporation
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of ssdt8.dat, Tue Apr  2 02:45:24 2019
+ * Disassembly of ssdt8.dat, Sun Jul 21 01:33:52 2019
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -20,37 +20,10 @@
  */
 DefinitionBlock ("", "SSDT", 1, "SoCDpf", "SoCDptf", 0x00001000)
 {
-    /*
-     * iASL Warning: There were 2 external control methods found during
-     * disassembly, but only 0 were resolved (2 unresolved). Additional
-     * ACPI tables may be required to properly disassemble the code. This
-     * resulting disassembler output file may not compile because the
-     * disassembler did not know how many arguments to assign to the
-     * unresolved methods. Note: SSDTs can be dynamically loaded at
-     * runtime and may or may not be available via the host OS.
-     *
-     * To specify the tables needed to resolve external control method
-     * references, the -e option can be used to specify the filenames.
-     * Example iASL invocations:
-     *     iasl -e ssdt1.aml ssdt2.aml ssdt3.aml -d dsdt.aml
-     *     iasl -e dsdt.aml ssdt2.aml -d ssdt1.aml
-     *     iasl -e ssdt*.aml -d dsdt.aml
-     *
-     * In addition, the -fe option can be used to specify a file containing
-     * control method external declarations with the associated method
-     * argument counts. Each line of the file must be of the form:
-     *     External (<method pathname>, MethodObj, <argument count>)
-     * Invocation:
-     *     iasl -fe refs.txt -d dsdt.aml
-     *
-     * The following methods were unresolved and many not compile properly
-     * because the disassembler had to guess at the number of arguments
-     * required for each:
-     */
-    External (_SB_.DPTF.CTOK, IntObj)
+    External (_SB_.DPTF.CTOK, MethodObj)    // 1 Arguments
     External (_SB_.PCI0.PNIT, UnknownObj)
-    External (ACTT, MethodObj)    // Warning: Unknown method, guessing 0 arguments
-    External (CRTT, MethodObj)    // Warning: Unknown method, guessing 0 arguments
+    External (ACTT, UnknownObj)
+    External (CRTT, UnknownObj)
 
     Scope (\_SB)
     {
@@ -81,20 +54,17 @@ DefinitionBlock ("", "SSDT", 1, "SoCDpf", "SoCDptf", 0x00001000)
 
             Method (_CRT, 0, Serialized)  // _CRT: Critical Temperature
             {
-                Return (\_SB.DPTF.CTOK) /* External reference */
-                CRTT ()
+                Return (\_SB.DPTF.CTOK (CRTT))
             }
 
             Method (_HOT, 0, Serialized)  // _HOT: Hot Temperature
             {
-                Return (\_SB.DPTF.CTOK) /* External reference */
-                (CRTT () - 0x03)
+                Return (\_SB.DPTF.CTOK ((CRTT - 0x03)))
             }
 
             Method (_PSV, 0, Serialized)  // _PSV: Passive Temperature
             {
-                Return (\_SB.DPTF.CTOK) /* External reference */
-                ACTT ()
+                Return (\_SB.DPTF.CTOK (ACTT))
             }
 
             Method (_SCP, 3, Serialized)  // _SCP: Set Cooling Policy

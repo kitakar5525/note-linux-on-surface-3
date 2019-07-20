@@ -84,49 +84,25 @@ kern  :err   : [  +0.000173] spi_master spi1: failed to transfer one message fro
 
 ## "OEMB" problem
 
-My Surface 3 is also affected by this problem. "OEMB" problem is described on:
+My Surface 3 is also affected by this problem.
+```bash
+$ sudo dmidecode
+[...]
+System Information
+	Manufacturer: OEMB
+	Product Name: OEMB
+[...]
+```
+
+"OEMB" problem is described on:
 - [Surface 3 (Not Pro) This Device is not a Surface 3 - Microsoft Community](https://answers.microsoft.com/en-us/surface/forum/all/surface-3-not-pro-this-device-is-not-a-surface-3/033edd29-feeb-42c8-8f98-6d4eb08411c7)
 - [Restore device information by software method - Microsoft Community](https://answers.microsoft.com/en-us/surface/forum/all/restore-device-information-by-software-method/ebf48589-71ca-4e6c-bd15-a84501de52b9)
 - [Half-bricking Surface 3 on 7.1 RC1? - Google Groups](https://groups.google.com/forum/#!topic/android-x86/z6GDuvV2oWk)
 
-To enable audio on such devices, you need to apply a patch like this:
+To enable audio on such devices, you need to apply a patch.
+See this Android-x86 [kernel commit](https://ja.osdn.net/projects/android-x86/scm/git/kernel/commits/fbd728231014aa2567621564436a3065a702f60a)
 
-```diff
-diff --git a/sound/soc/codecs/rt5645.c b/sound/soc/codecs/rt5645.c
-index be67468..70cf5dd 100644
---- a/sound/soc/codecs/rt5645.c
-+++ b/sound/soc/codecs/rt5645.c
-@@ -3701,6 +3701,14 @@ static const struct dmi_system_id dmi_platform_data[] = {
- 		},
- 		.driver_data = (void *)&intel_braswell_platform_data,
- 	},
-+	{
-+		.ident = "Microsoft Surface 3",
-+		.matches = {
-+			DMI_MATCH(DMI_SYS_VENDOR, "OEMB"),
-+			DMI_MATCH(DMI_PRODUCT_NAME, "OEMB"),
-+		},
-+		.driver_data = (void *)&intel_braswell_platform_data,
-+	},
- 	{
- 		/*
- 		 * Match for the GPDwin which unfortunately uses somewhat
-diff --git a/sound/soc/intel/common/soc-acpi-intel-cht-match.c b/sound/soc/intel/common/soc-acpi-intel-cht-match.c
-index 91bb99b..b0e2b0d 100644
---- a/sound/soc/intel/common/soc-acpi-intel-cht-match.c
-+++ b/sound/soc/intel/common/soc-acpi-intel-cht-match.c
-@@ -36,6 +36,13 @@ static const struct dmi_system_id cht_table[] = {
- 			DMI_MATCH(DMI_PRODUCT_NAME, "Surface 3"),
- 		},
- 	},
-+	{
-+		.callback = cht_surface_quirk_cb,
-+		.matches = {
-+			DMI_MATCH(DMI_SYS_VENDOR, "OEMB"),
-+			DMI_MATCH(DMI_PRODUCT_NAME, "OEMB"),
-+		},
-+	},
- 	{ }
- };
- 
-```
+You also need to apply a similar patch to `surface3-wmi.c`
+Have a look at my patch set.
+- [linux-surface-patches/Sound-add-DMI_MATCH-OEMB-for-broken-DMI-Surface-3.patch at v2.6 · kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches/blob/v2.6/patch-5.2/5525/Sound-add-DMI_MATCH-OEMB-for-broken-DMI-Surface-3.patch)
+- [linux-surface-patches/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch at master · kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches/blob/master/patch-5.2/5525/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch)

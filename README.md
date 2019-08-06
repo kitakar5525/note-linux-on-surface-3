@@ -14,6 +14,7 @@ Actual patches are here:
         - [What is working IF you apply patch(es) to kernel](#what-is-working-if-you-apply-patches-to-kernel)
         - [What is NOT working](#what-is-not-working)
             - [Touchscreen is not stable](#touchscreen-is-not-stable)
+                - [2019-08-06](#2019-08-06)
     - [Kernel parameters I pass to bootloader](#kernel-parameters-i-pass-to-bootloader)
     - ["OEMB" problem](#oemb-problem)
 
@@ -76,6 +77,17 @@ On kernel 5.1.y (I don't know about 5.0.y), touchscreen is not working even righ
 kern  :err   : [  +0.203592] Surface3-spi spi-MSHW0037:00: SPI transfer timed out
 kern  :err   : [  +0.000173] spi_master spi1: failed to transfer one message from queue
 ```
+
+##### 2019-08-06
+I'm still investigating why this issue happens, but at least reloading `surface3-spi` and `spi_pxa2xx_platform` modules will make the touch input work again:
+```bash
+sudo modprobe -r surface3-spi
+sudo mpdprobe -r spi_pxa2xx_platform
+sudo modprobe spi_pxa2xx_platform
+# reloading spi_pxa2xx_platform will automatically loads surface3-spi
+```
+
+You will need to do this after every suspend on 4.19/5.2 and system startup on 5.2.
 
 ## Kernel parameters I pass to bootloader
   - i915.enable_psr=1

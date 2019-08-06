@@ -89,6 +89,25 @@ sudo modprobe spi_pxa2xx_platform
 
 You will need to do this after every suspend on 4.19/5.2 and system startup on 5.2.
 
+In addition, this issue is not happening on Chromium OS based OSes at all.
+
+Enable debug output:
+```
+sudo su -c 'echo "file drivers/spi/spi-pxa2xx.c +p" > /sys/kernel/debug/dynamic_debug/control'
+```
+
+On chromeos-4.19 kernel, it uses PIO:
+```
+kern  :debug : [  +0.009260] Surface3-spi spi-MSHW0037:00: 7692307 Hz actual, PIO
+kern  :debug : [  +0.001105] Surface3-spi spi-MSHW0037:00: surface3_spi_irq_handler received -> ff ff ff ff a5 5a e7 7e 01 d2 00 80 01 03 03 24 00 e4 01 00 58 0b 58 0b 83 12 83 12 26 01 95 01 00 00 00 00 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+```
+
+On the other hand, on Linux 4.19/5.2, it uses DMA:
+```
+kern  :debug : [  +0.006383] Surface3-spi spi-MSHW0037:00: 7692307 Hz actual, DMA
+kern  :debug : [  +0.000495] Surface3-spi spi-MSHW0037:00: surface3_spi_irq_handler received -> ff ff ff ff a5 5a e7 7e 01 d2 00 80 01 03 03 18 00 e4 01 00 04 1a 04 1a e3 0c e3 0c b0 00 c5 00 00 00 00 00 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+```
+
 ## Kernel parameters I pass to bootloader
   - i915.enable_psr=1
   - i915.fastboot=1

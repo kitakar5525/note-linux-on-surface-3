@@ -15,6 +15,7 @@ Actual patches are here:
         - [What is NOT working](#what-is-not-working)
             - [Touchscreen is not stable](#touchscreen-is-not-stable)
                 - [2019-08-06](#2019-08-06)
+                - [2019-08-06 2](#2019-08-06-2)
     - [Kernel parameters I pass to bootloader](#kernel-parameters-i-pass-to-bootloader)
     - ["OEMB" problem](#oemb-problem)
 
@@ -107,6 +108,15 @@ On the other hand, on Linux 4.19/5.2, it uses DMA:
 ```
 kern  :debug : [  +0.006383] Surface3-spi spi-MSHW0037:00: 7692307 Hz actual, DMA
 kern  :debug : [  +0.000495] Surface3-spi spi-MSHW0037:00: surface3_spi_irq_handler received -> ff ff ff ff a5 5a e7 7e 01 d2 00 80 01 03 03 18 00 e4 01 00 04 1a 04 1a e3 0c e3 0c b0 00 c5 00 00 00 00 00 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+```
+
+##### 2019-08-06 2
+I feel rather not reloading `surface3-spi` will make the touch input last longer.
+```bash
+#sudo modprobe -r surface3-spi
+sudo mpdprobe -r spi_pxa2xx_platform
+sudo modprobe spi_pxa2xx_platform
+# reloading spi_pxa2xx_platform will automatically loads surface3-spi
 ```
 
 ## Kernel parameters I pass to bootloader

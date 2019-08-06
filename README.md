@@ -89,11 +89,12 @@ sudo modprobe spi_pxa2xx_platform
 
 You will need to do this after every suspend on 4.19/5.2 and system startup on 5.2.
 
-In addition, this issue is not happening on Chromium OS based OSes at all.
+In addition, this issue is not happening on Chromium OS based OS (kernel chromeos-4.19) at all.
 
 Enable debug output:
 ```
 sudo su -c 'echo "file drivers/spi/spi-pxa2xx.c +p" > /sys/kernel/debug/dynamic_debug/control'
+sudo su -c 'echo "file drivers/input/touchscreen/surface3_spi.c +p" > /sys/kernel/debug/dynamic_debug/control'
 ```
 
 On chromeos-4.19 kernel, it uses PIO:

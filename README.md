@@ -16,7 +16,6 @@ Actual patches are here:
             - [Touchscreen is not stable](#touchscreen-is-not-stable)
                 - [2019-08-06](#2019-08-06)
                 - [2019-08-06 2](#2019-08-06-2)
-    - [Kernel parameters I pass to bootloader](#kernel-parameters-i-pass-to-bootloader)
     - ["OEMB" issue](#oemb-issue)
         - [Firmware update with DMI-broken Surface 3](#firmware-update-with-dmi-broken-surface-3)
 
@@ -119,11 +118,6 @@ sudo mpdprobe -r spi_pxa2xx_platform
 sudo modprobe spi_pxa2xx_platform
 # reloading spi_pxa2xx_platform will automatically loads surface3-spi
 ```
-
-## Kernel parameters I pass to bootloader
-  - i915.enable_psr=1
-  - i915.fastboot=1
-  - i915.enable_guc=-1
 
 ## "OEMB" issue
 

@@ -159,7 +159,7 @@ Have a look at my patches.
 
 ### Firmware update with DMI-broken Surface 3
 
-Normally, the firmware update will come via Windows Update. However, my DMI-broken Surface 3 will be recognized as "OEMB", not "Surface 3". Thus I cannot update it in a normal way.
+Firmware updates are usually done via Windows Update. However, DMI-broken Surface 3 will be recognized as "OEMB", not "Surface 3". Therefore It cannot be updated in the usual way.
 
 Get firmware update MSI installer from Microsoft:
 - [Download drivers and firmware for Surface](https://support.microsoft.com/en-us/help/4023482/surface-download-drivers-and-firmware-for-surface)
@@ -174,4 +174,4 @@ At this point, you cannot pass product name check (It shows something like "your
 +OSVersion=Win10;ProductName=OEMB;SystemSKU=;OSBuild=18362;SystemModels=;SystemSKUs=;PreventBitLockerNoSecureBoot=0
 ```
 
-However, updating firmware did not my DMI. My Surface 3 remains OEMB even after firmware update using MSI installer.
+However, updating the firmware did not fix the DMI. My Surface 3 remains OEMB even after updating the firmware using the MSI installer.

@@ -159,7 +159,7 @@ Have a look at my patches.
 
 ### Firmware update with DMI-broken Surface 3
 
-Normally, the firmware update will come via Windows Update. However, my DMI-broken Surface 3 will recognized as "OEMB", not "Surface 3". Thus I cannot update it in a normal way.
+Normally, the firmware update will come via Windows Update. However, my DMI-broken Surface 3 will be recognized as "OEMB", not "Surface 3". Thus I cannot update it in a normal way.
 
 Get firmware update MSI installer from Microsoft:
 - [Download drivers and firmware for Surface](https://support.microsoft.com/en-us/help/4023482/surface-download-drivers-and-firmware-for-surface)

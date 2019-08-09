@@ -17,7 +17,8 @@ Actual patches are here:
                 - [2019-08-06](#2019-08-06)
                 - [2019-08-06 2](#2019-08-06-2)
     - [Kernel parameters I pass to bootloader](#kernel-parameters-i-pass-to-bootloader)
-    - ["OEMB" problem](#oemb-problem)
+    - ["OEMB" issue](#oemb-issue)
+        - [Firmware update with broken-DMI Surface 3](#firmware-update-with-broken-dmi-surface-3)
 
 <!-- /TOC -->
 
@@ -124,9 +125,9 @@ sudo modprobe spi_pxa2xx_platform
   - i915.fastboot=1
   - i915.enable_guc=-1
 
-## "OEMB" problem
+## "OEMB" issue
 
-My Surface 3 is also affected by this problem.
+My Surface 3 is also affected by this issue.
 ```bash
 $ sudo dmidecode
 [...]
@@ -136,15 +137,41 @@ System Information
 [...]
 ```
 
-"OEMB" problem is described on:
+"OEMB" issue is described on:
 - [Surface 3 (Not Pro) This Device is not a Surface 3 - Microsoft Community](https://answers.microsoft.com/en-us/surface/forum/all/surface-3-not-pro-this-device-is-not-a-surface-3/033edd29-feeb-42c8-8f98-6d4eb08411c7)
 - [Restore device information by software method - Microsoft Community](https://answers.microsoft.com/en-us/surface/forum/all/restore-device-information-by-software-method/ebf48589-71ca-4e6c-bd15-a84501de52b9)
 - [Half-bricking Surface 3 on 7.1 RC1? - Google Groups](https://groups.google.com/forum/#!topic/android-x86/z6GDuvV2oWk)
 
-To enable audio on such devices, you need to apply a patch.
-See this Android-x86 [kernel commit](https://ja.osdn.net/projects/android-x86/scm/git/kernel/commits/fbd728231014aa2567621564436a3065a702f60a)
+To enable audio on such devices, you need to add DMI match entry like this:
+```c
+.matches = {
+    DMI_MATCH(DMI_SYS_VENDOR, "OEMB"),
+    DMI_MATCH(DMI_PRODUCT_NAME, "OEMB"),
+},
+```
+
+See Android-x86 [kernel commit](https://ja.osdn.net/projects/android-x86/scm/git/kernel/commits/fbd728231014aa2567621564436a3065a702f60a)
 
 You also need to apply a similar patch to `surface3-wmi.c`
-Have a look at my patch set.
-- [linux-surface-patches/Sound-add-DMI_MATCH-OEMB-for-broken-DMI-Surface-3.patch at v2.6 · kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches/blob/v2.6/patch-5.2/5525/Sound-add-DMI_MATCH-OEMB-for-broken-DMI-Surface-3.patch)
-- [linux-surface-patches/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch at master · kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches/blob/v2.6/patch-5.2/5525/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch)
+Have a look at my patches.
+- [linux-surface-patches/Sound-add-DMI_MATCH-OEMB-for-broken-DMI-Surface-3.patch at v2.9.2 · kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches/blob/v2.9.2/patch-5.2/5525-Surface_3-DMI-OEMB/Sound-add-DMI_MATCH-OEMB-for-broken-DMI-Surface-3.patch)
+- [linux-surface-patches/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch at v2.9.2 · kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches/blob/v2.9.2/patch-5.2/5525-Surface_3-DMI-OEMB/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch)
+
+### Firmware update with broken-DMI Surface 3
+
+Normally, the firmware update will come via Windows Update. However, my broken-DMI Surface 3 will recognized as "OEMB", not "Surface 3". Thus I cannot update it in a normal way.
+
+Get firmware update MSI installer from Microsoft:
+- [Download drivers and firmware for Surface](https://support.microsoft.com/en-us/help/4023482/surface-download-drivers-and-firmware-for-surface)
+
+At this point, you cannot pass product name check (It shows something like "your device is not Surface 3"). Edit the MSI installer using InstEd.
+
+- InstEd->Tables->Property->InstallPrerequisites
+
+```diff
+-OSVersion=Win10;ProductName=Surface 3;SystemSKU=;OSBuild=18362;SystemModels=;SystemSKUs=Surface_3_ROW;PreventBitLockerNoSecureBoot=0
+# to something like this:
++OSVersion=Win10;ProductName=OEMB;SystemSKU=;OSBuild=18362;SystemModels=;SystemSKUs=;PreventBitLockerNoSecureBoot=0
+```
+
+However, updating firmware did not my DMI. My Surface 3 remains OEMB even after firmware update using MSI installer.

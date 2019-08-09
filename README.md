@@ -18,7 +18,7 @@ Actual patches are here:
                 - [2019-08-06 2](#2019-08-06-2)
     - [Kernel parameters I pass to bootloader](#kernel-parameters-i-pass-to-bootloader)
     - ["OEMB" issue](#oemb-issue)
-        - [Firmware update with broken-DMI Surface 3](#firmware-update-with-broken-dmi-surface-3)
+        - [Firmware update with DMI-broken Surface 3](#firmware-update-with-dmi-broken-surface-3)
 
 <!-- /TOC -->
 
@@ -157,9 +157,9 @@ Have a look at my patches.
 - [linux-surface-patches/Sound-add-DMI_MATCH-OEMB-for-broken-DMI-Surface-3.patch at v2.9.2 · kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches/blob/v2.9.2/patch-5.2/5525-Surface_3-DMI-OEMB/Sound-add-DMI_MATCH-OEMB-for-broken-DMI-Surface-3.patch)
 - [linux-surface-patches/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch at v2.9.2 · kitakar5525/linux-surface-patches](https://github.com/kitakar5525/linux-surface-patches/blob/v2.9.2/patch-5.2/5525-Surface_3-DMI-OEMB/surface3-wmi-add-DMI_MATCH-OEMB-for-broken-DMI-Surfa.patch)
 
-### Firmware update with broken-DMI Surface 3
+### Firmware update with DMI-broken Surface 3
 
-Normally, the firmware update will come via Windows Update. However, my broken-DMI Surface 3 will recognized as "OEMB", not "Surface 3". Thus I cannot update it in a normal way.
+Normally, the firmware update will come via Windows Update. However, my DMI-broken Surface 3 will recognized as "OEMB", not "Surface 3". Thus I cannot update it in a normal way.
 
 Get firmware update MSI installer from Microsoft:
 - [Download drivers and firmware for Surface](https://support.microsoft.com/en-us/help/4023482/surface-download-drivers-and-firmware-for-surface)

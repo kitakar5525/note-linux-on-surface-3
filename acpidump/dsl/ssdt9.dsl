@@ -5,7 +5,7 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of ssdt9.dat, Sun Jul 21 01:33:52 2019
+ * Disassembly of ssdt9.dat, Mon Aug 19 00:47:52 2019
  *
  * Original Table Header:
  *     Signature        "SSDT"

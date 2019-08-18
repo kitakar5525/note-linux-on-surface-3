@@ -28,7 +28,7 @@ iasl -d *
 iasl -e ssdt* -d dsdt.dat
 ```
 
-# error decompiling oem0.dat
+## error decompiling oem0.dat
 ```
 $ iasl -d oem0.dat
 Intel ACPI Component Architecture

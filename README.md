@@ -13,9 +13,7 @@ Actual patches are here:
             - [S0ix state](#s0ix-state)
         - [What is working when you apply patch(es) to kernel](#what-is-working-when-you-apply-patches-to-kernel)
         - [What is not working](#what-is-not-working)
-            - [Touchscreen is not stable](#touchscreen-is-not-stable)
-                - [2019-08-06](#2019-08-06)
-                - [2019-08-06 2](#2019-08-06-2)
+            - [Touch input may crash on mainline kernels](#touch-input-may-crash-on-mainline-kernels)
     - ["OEMB" issue](#oemb-issue)
         - [Firmware update with DMI-broken Surface 3](#firmware-update-with-dmi-broken-surface-3)
 
@@ -65,59 +63,9 @@ References:
 - Wi-Fi power_save
   - We need to disable power_save for stability for now. If we disable power_save, the stability is enough for daily usage (still sometimes drops wifi, though). Disabling power_save is included in wifi patch of jakeday repository.
 
-#### Touchscreen is not stable
+#### Touch input may crash on mainline kernels
 
-On kernel 4.19.y, touchscreen is working unless you put your Surface 3 into suspend (s2idle).
-After s2idle:
-```bash
-kern  :err   : [  +0.203408] Surface3-spi spi-MSHW0037:00: SPI transfer timed out
-```
-
-On kernel 5.1.y (I don't know about 5.0.y), touchscreen is not working even right after boot:
-```bash
-kern  :err   : [  +0.203592] Surface3-spi spi-MSHW0037:00: SPI transfer timed out
-kern  :err   : [  +0.000173] spi_master spi1: failed to transfer one message from queue
-```
-
-##### 2019-08-06
-I'm still investigating why this issue happens, but at least reloading `surface3-spi` and `spi_pxa2xx_platform` modules will make the touch input work again:
-```bash
-sudo modprobe -r surface3-spi
-sudo mpdprobe -r spi_pxa2xx_platform
-sudo modprobe spi_pxa2xx_platform
-# reloading spi_pxa2xx_platform will automatically loads surface3-spi
-```
-
-You will need to do this after every suspend on 4.19/5.2 and system startup on 5.2.
-
-In addition, this issue is not happening on Chromium OS based OS (kernel chromeos-4.19) at all.
-
-Enable debug output:
-```
-sudo su -c 'echo "file drivers/spi/spi-pxa2xx.c +p" > /sys/kernel/debug/dynamic_debug/control'
-sudo su -c 'echo "file drivers/input/touchscreen/surface3_spi.c +p" > /sys/kernel/debug/dynamic_debug/control'
-```
-
-On chromeos-4.19 kernel, it uses PIO:
-```
-kern  :debug : [  +0.009260] Surface3-spi spi-MSHW0037:00: 7692307 Hz actual, PIO
-kern  :debug : [  +0.001105] Surface3-spi spi-MSHW0037:00: surface3_spi_irq_handler received -> ff ff ff ff a5 5a e7 7e 01 d2 00 80 01 03 03 24 00 e4 01 00 58 0b 58 0b 83 12 83 12 26 01 95 01 00 00 00 00 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-```
-
-On the other hand, on Linux 4.19/5.2, it uses DMA:
-```
-kern  :debug : [  +0.006383] Surface3-spi spi-MSHW0037:00: 7692307 Hz actual, DMA
-kern  :debug : [  +0.000495] Surface3-spi spi-MSHW0037:00: surface3_spi_irq_handler received -> ff ff ff ff a5 5a e7 7e 01 d2 00 80 01 03 03 18 00 e4 01 00 04 1a 04 1a e3 0c e3 0c b0 00 c5 00 00 00 00 00 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-```
-
-##### 2019-08-06 2
-I feel rather not reloading `surface3-spi` will make the touch input last longer.
-```bash
-#sudo modprobe -r surface3-spi
-sudo mpdprobe -r spi_pxa2xx_platform
-sudo modprobe spi_pxa2xx_platform
-# reloading spi_pxa2xx_platform will automatically loads surface3-spi
-```
+See #3
 
 ## "OEMB" issue
 

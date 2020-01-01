@@ -9,7 +9,7 @@ Actual patches are here:
 
 - [Notes to use Linux on Surface 3](#notes-to-use-linux-on-surface-3)
     - [Working status](#working-status)
-        - [What is working NOW which was not before](#what-is-working-now-which-was-not-before)
+        - [What is working now which was not before](#what-is-working-now-which-was-not-before)
             - [S0ix state](#s0ix-state)
         - [What is working when you apply patch(es) to kernel](#what-is-working-when-you-apply-patches-to-kernel)
         - [What is not working](#what-is-not-working)
@@ -21,7 +21,7 @@ Actual patches are here:
 
 ## Working status
 
-### What is working NOW which was not before
+### What is working now which was not before
 
 - Internal display not configurable except `xrandr`.
 

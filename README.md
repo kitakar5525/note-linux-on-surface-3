@@ -11,8 +11,8 @@ Actual patches are here:
     - [Working status](#working-status)
         - [What is working NOW which was not before](#what-is-working-now-which-was-not-before)
             - [S0ix state](#s0ix-state)
-        - [What is working IF you apply patch(es) to kernel](#what-is-working-if-you-apply-patches-to-kernel)
-        - [What is NOT working](#what-is-not-working)
+        - [What is working when you apply patch(es) to kernel](#what-is-working-when-you-apply-patches-to-kernel)
+        - [What is not working](#what-is-not-working)
             - [Touchscreen is not stable](#touchscreen-is-not-stable)
                 - [2019-08-06](#2019-08-06)
                 - [2019-08-06 2](#2019-08-06-2)
@@ -54,12 +54,12 @@ It seems that if you want to achieve s0ix on 4.19 LTS, you need these two patche
 References:
 - [196861 – S0ix enablement - Asus E200HA (Atom x5-Z8300, Cherrytrail)](https://bugzilla.kernel.org/show_bug.cgi?id=196861#c8)
 
-### What is working IF you apply patch(es) to kernel
+### What is working when you apply patch(es) to kernel
 - Battery status reading
   - [[v3] platform/x86: surface3_power: MSHW0011 rev-eng implementation - Patchwork](https://patchwork.kernel.org/patch/10584079/). On above kernel 4.20, maybe you can also build only this module, not whole kernel (not tested). Or, 
   - use jakeday [repository](https://github.com/jakeday/linux-surface)
 
-### What is NOT working
+### What is not working
 
 - Cameras
 - Wi-Fi power_save

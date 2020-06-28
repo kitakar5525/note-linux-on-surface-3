@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20190703 (64-bit version)
- * Copyright (c) 2000 - 2019 Intel Corporation
+ * AML/ASL+ Disassembler version 20200528 (64-bit version)
+ * Copyright (c) 2000 - 2020 Intel Corporation
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of ssdt4.dat, Mon Aug 19 00:47:52 2019
+ * Disassembly of ssdt4.dat, Sun Jun 28 16:55:32 2020
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -104,6 +104,7 @@ DefinitionBlock ("", "SSDT", 1, "DptfTb", "DptfTab", 0x00001000)
     External (_SB_.PCI0.I2C7.PMIC.TMP3, IntObj)
     External (_SB_.PCI0.I2C7.PMIC.TMP4, IntObj)
     External (_SB_.PCI0.PNIT, UnknownObj)
+    External (_SB_.PDBG, UnknownObj)
     External (_SB_.PST1, UnknownObj)
     External (_SB_.PST2, UnknownObj)
     External (ABC0, IntObj)

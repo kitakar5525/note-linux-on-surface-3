@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20190703 (64-bit version)
- * Copyright (c) 2000 - 2019 Intel Corporation
+ * AML/ASL+ Disassembler version 20200528 (64-bit version)
+ * Copyright (c) 2000 - 2020 Intel Corporation
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of ssdt3.dat, Mon Aug 19 00:47:52 2019
+ * Disassembly of ssdt3.dat, Sun Jun 28 16:55:32 2020
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -20,54 +20,27 @@
  */
 DefinitionBlock ("", "SSDT", 1, "CpuDpf", "CpuDptf", 0x00001000)
 {
-    /*
-     * iASL Warning: There were 4 external control methods found during
-     * disassembly, but only 3 were resolved (1 unresolved). Additional
-     * ACPI tables may be required to properly disassemble the code. This
-     * resulting disassembler output file may not compile because the
-     * disassembler did not know how many arguments to assign to the
-     * unresolved methods. Note: SSDTs can be dynamically loaded at
-     * runtime and may or may not be available via the host OS.
-     *
-     * To specify the tables needed to resolve external control method
-     * references, the -e option can be used to specify the filenames.
-     * Example iASL invocations:
-     *     iasl -e ssdt1.aml ssdt2.aml ssdt3.aml -d dsdt.aml
-     *     iasl -e dsdt.aml ssdt2.aml -d ssdt1.aml
-     *     iasl -e ssdt*.aml -d dsdt.aml
-     *
-     * In addition, the -fe option can be used to specify a file containing
-     * control method external declarations with the associated method
-     * argument counts. Each line of the file must be of the form:
-     *     External (<method pathname>, MethodObj, <argument count>)
-     * Invocation:
-     *     iasl -fe refs.txt -d dsdt.aml
-     *
-     * The following methods were unresolved and many not compile properly
-     * because the disassembler had to guess at the number of arguments
-     * required for each:
-     */
-    External (_PR_.CPU0, UnknownObj)
+    External (_PR_.CPU0, ProcessorObj)
     External (_PR_.CPU0._PPC, IntObj)
     External (_PR_.CPU0._PSS, IntObj)
     External (_PR_.CPU0._PTC, MethodObj)    // 0 Arguments
     External (_PR_.CPU0._TDL, MethodObj)    // 0 Arguments
     External (_PR_.CPU0._TPC, IntObj)
     External (_PR_.CPU0._TSD, MethodObj)    // 0 Arguments
-    External (_PR_.CPU1, UnknownObj)
-    External (_PR_.CPU2, UnknownObj)
-    External (_PR_.CPU3, UnknownObj)
-    External (_SB_.ADP1._PSR, UnknownObj)
+    External (_PR_.CPU1, ProcessorObj)
+    External (_PR_.CPU2, ProcessorObj)
+    External (_PR_.CPU3, ProcessorObj)
+    External (_SB_.ACTT, IntObj)
+    External (_SB_.ADP1._PSR, MethodObj)    // 0 Arguments
+    External (_SB_.DLPO, PkgObj)
     External (_SB_.DPTF.CTOK, IntObj)
     External (_SB_.MBID, UnknownObj)
     External (_SB_.PAGD, UnknownObj)
-    External (_SB_.PAGD.IDCN, UnknownObj)
+    External (_SB_.PAGD.IDCN, IntObj)
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.I2C1, UnknownObj)
-    External (ACTT, MethodObj)    // Warning: Unknown method, guessing 0 arguments
-    External (DLPO, UnknownObj)
-    External (DPSR, UnknownObj)
-    External (PDBG, IntObj)
+    External (_SB_.PDBG, IntObj)
+    External (DPSR, FieldUnitObj)
 
     Scope (\_SB.PCI0)
     {
@@ -372,14 +345,14 @@ DefinitionBlock ("", "SSDT", 1, "CpuDpf", "CpuDptf", 0x00001000)
 
             Method (_PSV, 0, Serialized)  // _PSV: Passive Temperature
             {
-                If ((\_SB.ADP1._PSR == Zero))
+                If ((\_SB.ADP1._PSR () == Zero))
                 {
                     Return (\_SB.DPTF.CTOK) /* External reference */
-                    (ACTT () - 0x05)
+                    (ACTT - 0x05)
                 }
 
                 Return (\_SB.DPTF.CTOK) /* External reference */
-                ACTT ()
+                ACTT
             }
 
             Method (_SCP, 3, Serialized)  // _SCP: Set Cooling Policy

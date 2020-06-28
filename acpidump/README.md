@@ -31,15 +31,17 @@ iasl -e ssdt* -d dsdt.dat
 ## error decompiling oem0.dat
 ```
 $ iasl -d oem0.dat
+
 Intel ACPI Component Architecture
-ASL+ Optimizing Compiler/Disassembler version 20190703
-Copyright (c) 2000 - 2019 Intel Corporation
+ASL+ Optimizing Compiler/Disassembler version 20200528
+Copyright (c) 2000 - 2020 Intel Corporation
 
 File appears to be binary: found 96 non-ASCII characters, disassembling
 Binary file appears to be a valid ACPI table, disassembling
 Input file oem0.dat, Length 0x84 (132) bytes
 ACPI: OEM0 0x0000000000000000 000084 (v05 INTEL  BATTERY  00000005 INTL 00000000)
 Pass 1 parse of [OEM0]
+Could not parse ACPI tables, AE_AML_NO_OPERAND
 ```
 
 The contents:

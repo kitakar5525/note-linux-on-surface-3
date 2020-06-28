@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20190703 (64-bit version)
- * Copyright (c) 2000 - 2019 Intel Corporation
+ * AML/ASL+ Disassembler version 20200528 (64-bit version)
+ * Copyright (c) 2000 - 2020 Intel Corporation
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of ssdt1.dat, Mon Aug 19 00:47:52 2019
+ * Disassembly of ssdt1.dat, Sun Jun 28 16:55:32 2020
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -20,9 +20,9 @@
  */
 DefinitionBlock ("", "SSDT", 1, "Intel_", "Tpm2Tabl", 0x00001000)
 {
-    External (TM2A, IntObj)
-    External (TM2E, IntObj)
-    External (TM2L, IntObj)
+    External (TM2A, FieldUnitObj)
+    External (TM2E, FieldUnitObj)
+    External (TM2L, FieldUnitObj)
 
     Scope (\_SB)
     {
@@ -35,14 +35,14 @@ DefinitionBlock ("", "SSDT", 1, "Intel_", "Tpm2Tabl", 0x00001000)
                 Memory32Fixed (ReadWrite,
                     0x00000000,         // Address Base
                     0x00001000,         // Address Length
-                    _Y00)
+                    _Y35)
             })
             Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
             {
-                CreateDWordField (^TPMX, \_SB.CTPM._Y00._BAS, TB0A)  // _BAS: Base Address
-                CreateDWordField (^TPMX, \_SB.CTPM._Y00._LEN, TB0L)  // _LEN: Length
-                TB0A = TM2A /* External reference */
-                TB0L = TM2L /* External reference */
+                CreateDWordField (^TPMX, \_SB.CTPM._Y35._BAS, TB0A)  // _BAS: Base Address
+                CreateDWordField (^TPMX, \_SB.CTPM._Y35._LEN, TB0L)  // _LEN: Length
+                TB0A = TM2A /* \TM2A */
+                TB0L = TM2L /* \TM2L */
                 Return (TPMX) /* \_SB_.CTPM.TPMX */
             }
 

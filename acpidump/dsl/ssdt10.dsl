@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20190703 (64-bit version)
- * Copyright (c) 2000 - 2019 Intel Corporation
+ * AML/ASL+ Disassembler version 20200528 (64-bit version)
+ * Copyright (c) 2000 - 2020 Intel Corporation
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of ssdt10.dat, Mon Aug 19 00:47:52 2019
+ * Disassembly of ssdt10.dat, Sun Jun 28 16:55:32 2020
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -21,9 +21,9 @@
 DefinitionBlock ("", "SSDT", 1, "PmRef", "ApCst", 0x00003000)
 {
     External (_PR_.CPU0._CST, IntObj)
-    External (_PR_.CPU1, DeviceObj)
-    External (_PR_.CPU2, DeviceObj)
-    External (_PR_.CPU3, DeviceObj)
+    External (_PR_.CPU1, ProcessorObj)
+    External (_PR_.CPU2, ProcessorObj)
+    External (_PR_.CPU3, ProcessorObj)
 
     Scope (\_PR.CPU1)
     {

@@ -12988,10 +12988,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
                 If ((STAT == Zero))
                 {
                     SBUF = SREV /* \_SB_.PCI0.I2C4.SREV */
-                    ^^^^GPO2.SHRV = DATD /* \_SB_.PCI0.I2C4.SAM_.DATD */
+                    \_SB_.GPO2.MSAY.SHRV = DATD /* \_SB_.PCI0.I2C4.SAM_.DATD */
                 }
 
-                Return (^^^^GPO2.SHRV) /* \_SB_.GPO2.SHRV */
+                Return (\_SB_.GPO2.MSAY.SHRV) /* \_SB_.GPO2.SHRV */
             }
 
             Method (_SUB, 0, NotSerialized)  // _SUB: Subsystem ID
@@ -12999,10 +12999,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
                 If ((STAT == Zero))
                 {
                     SBUF = SVSI /* \_SB_.PCI0.I2C4.SVSI */
-                    ^^^^GPO2.SSUB = DBUF /* \_SB_.PCI0.I2C4.SAM_.DBUF */
+                    \_SB_.GPO2.MSAY.SSUB = DBUF /* \_SB_.PCI0.I2C4.SAM_.DBUF */
                 }
 
-                Return (^^^^GPO2.SSUB) /* \_SB_.GPO2.SSUB */
+                Return (\_SB_.GPO2.MSAY.SSUB) /* \_SB_.GPO2.SSUB */
             }
 
             Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
@@ -13102,49 +13102,52 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
 
     Scope (_SB.GPO2)
     {
-        Name (SHRV, 0x1001)
-        Name (SSUB, "MSHW1001")
-        Name (DDBH, Zero)
-        Name (HRVX, 0x1001)
-        Name (HIDX, "MSHW0004")
-        Name (SUBX, "MSAY0001")
-        OperationRegion (AIOP, GeneralPurposeIo, Zero, One)
-        Field (AIOP, ByteAcc, NoLock, Preserve)
+        Device (MSAY)
         {
-            Connection (^PCI0.I2C4.GPIA), 
-            AIRL,   1
-        }
-
-        Method (_E10, 0, NotSerialized)  // _Exx: Edge-Triggered GPE, xx=0x00-0xFF
-        {
-            ^^PCI0.I2C4.AIRB = AIRL /* \_SB_.GPO2.AIRL */
-            P8XH (Zero, ^^PCI0.I2C4.AIRB)
-            If ((^^PCI0.I2C4.AIRB == One))
+            Name (SHRV, 0x1001)
+            Name (SSUB, "MSHW1001")
+            Name (DDBH, Zero)
+            Name (HRVX, 0x1001)
+            Name (HIDX, "MSHW0004")
+            Name (SUBX, "MSAY0001")
+            OperationRegion (AIOP, GeneralPurposeIo, Zero, One)
+            Field (AIOP, ByteAcc, NoLock, Preserve)
             {
-                P8XH (One, 0xBB)
-                If ((DDBH != Zero))
-                {
-                    P8XH (One, 0xCC)
-                    Notify (^^PCI0.I2C4.BLAD, One) // Device Check
-                    Unload (DDBH)
-                    DDBH = Zero
-                }
+                Connection (^PCI0.I2C4.GPIA), 
+                AIRL,   1
             }
-            Else
+
+            Method (_E10, 0, NotSerialized)  // _Exx: Edge-Triggered GPE, xx=0x00-0xFF
             {
-                P8XH (One, 0xAA)
-                If ((DDBH == Zero))
+                ^^PCI0.I2C4.AIRB = AIRL /* \_SB_.GPO2.AIRL */
+                P8XH (Zero, ^^PCI0.I2C4.AIRB)
+                If ((^^PCI0.I2C4.AIRB == One))
                 {
-                    ^^PCI0.I2C4.SAM.SBUF = ^^PCI0.I2C4.SRV2 /* \_SB_.PCI0.I2C4.SRV2 */
-                    HRVX = ^^PCI0.I2C4.SAM.DATD /* \_SB_.PCI0.I2C4.SAM_.DATD */
-                    ^^PCI0.I2C4.SAM.SBUF = ^^PCI0.I2C4.VSI2 /* \_SB_.PCI0.I2C4.VSI2 */
-                    SUBX = ^^PCI0.I2C4.SAM.DBUF /* \_SB_.PCI0.I2C4.SAM_.DBUF */
-                    Local0 = LoadTable ("WDSA", "MSHWDS", "ACTABL", "", "", Zero)
-                    If ((Local0 != Zero))
+                    P8XH (One, 0xBB)
+                    If ((DDBH != Zero))
                     {
-                        P8XH (One, 0xDD)
-                        DDBH = ToInteger (Local0)
+                        P8XH (One, 0xCC)
                         Notify (^^PCI0.I2C4.BLAD, One) // Device Check
+                        Unload (DDBH)
+                        DDBH = Zero
+                    }
+                }
+                Else
+                {
+                    P8XH (One, 0xAA)
+                    If ((DDBH == Zero))
+                    {
+                        ^^PCI0.I2C4.SAM.SBUF = ^^PCI0.I2C4.SRV2 /* \_SB_.PCI0.I2C4.SRV2 */
+                        HRVX = ^^PCI0.I2C4.SAM.DATD /* \_SB_.PCI0.I2C4.SAM_.DATD */
+                        ^^PCI0.I2C4.SAM.SBUF = ^^PCI0.I2C4.VSI2 /* \_SB_.PCI0.I2C4.VSI2 */
+                        SUBX = ^^PCI0.I2C4.SAM.DBUF /* \_SB_.PCI0.I2C4.SAM_.DBUF */
+                        Local0 = LoadTable ("WDSA", "MSHWDS", "ACTABL", "", "", Zero)
+                        If ((Local0 != Zero))
+                        {
+                            P8XH (One, 0xDD)
+                            DDBH = ToInteger (Local0)
+                            Notify (^^PCI0.I2C4.BLAD, One) // Device Check
+                        }
                     }
                 }
             }

@@ -12224,7 +12224,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
             Name (_HID, "ACPI0003" /* Power Source Device */)  // _HID: Hardware ID
             Name (_DEP, Package (0x02)  // _DEP: Dependencies
             {
-                "\\_SB.PCI0.I2C1", 
+                \_SB.PCI0.I2C1, 
                 I2Z1
             })
             Name (BUF0, Buffer (0x80){})
@@ -12471,7 +12471,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
             Name (_UID, One)  // _UID: Unique ID
             Name (_DEP, Package (0x02)  // _DEP: Dependencies
             {
-                "\\_SB.PCI0.I2C1", 
+                \_SB.PCI0.I2C1, 
                 I2Z1
             })
             Name (BST0, Package (0x04)

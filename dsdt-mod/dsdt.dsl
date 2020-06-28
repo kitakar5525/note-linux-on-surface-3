@@ -5376,8 +5376,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
             Device (RTEK)
             {
                 Name (_ADR, Zero)  // _ADR: Address
-                Name (_HID, "10EC5640" /* Realtek I2S Audio Codec */)  // _HID: Hardware ID
-                Name (_CID, "10EC5640" /* Realtek I2S Audio Codec */)  // _CID: Compatible ID
+                Name (_HID, "10EC5645" /* Realtek I2S Audio Codec */)  // _HID: Hardware ID
+                Name (_CID, "10EC5645" /* Realtek I2S Audio Codec */)  // _CID: Compatible ID
                 Name (_SUB, "10EC1070")  // _SUB: Subsystem ID
                 Name (_DDN, "ALC5642")  // _DDN: DOS Device Name
                 Name (_UID, One)  // _UID: Unique ID

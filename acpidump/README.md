@@ -20,12 +20,12 @@ acpixtract -a acpidump.dat
 
 - disassemble the tables
 ```
-iasl -d *
+iasl -d *.dat
 ```
 
 - disassemble the dsdt table with external symbol resolution
 ```
-iasl -e ssdt* -d dsdt.dat
+iasl -e ssdt*.dat -d dsdt.dat
 ```
 
 ## error decompiling oem0.dat

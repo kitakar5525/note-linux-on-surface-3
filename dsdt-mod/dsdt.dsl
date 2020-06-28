@@ -13113,21 +13113,21 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
             OperationRegion (AIOP, GeneralPurposeIo, Zero, One)
             Field (AIOP, ByteAcc, NoLock, Preserve)
             {
-                Connection (^PCI0.I2C4.GPIA), 
+                Connection (\_SB.PCI0.I2C4.GPIA), 
                 AIRL,   1
             }
 
             Method (_E10, 0, NotSerialized)  // _Exx: Edge-Triggered GPE, xx=0x00-0xFF
             {
-                ^^PCI0.I2C4.AIRB = AIRL /* \_SB_.GPO2.AIRL */
-                P8XH (Zero, ^^PCI0.I2C4.AIRB)
-                If ((^^PCI0.I2C4.AIRB == One))
+                \_SB_.GPO2.MSAY.AIRL = AIRL /* \_SB_.GPO2.AIRL */
+                P8XH (Zero, \_SB_.GPO2.MSAY.AIRL)
+                If ((\_SB_.GPO2.MSAY.AIRL == One))
                 {
                     P8XH (One, 0xBB)
                     If ((DDBH != Zero))
                     {
                         P8XH (One, 0xCC)
-                        Notify (^^PCI0.I2C4.BLAD, One) // Device Check
+                        Notify (\_SB_.PCI0.I2C4.BLAD, One) // Device Check
                         Unload (DDBH)
                         DDBH = Zero
                     }
@@ -13137,16 +13137,16 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
                     P8XH (One, 0xAA)
                     If ((DDBH == Zero))
                     {
-                        ^^PCI0.I2C4.SAM.SBUF = ^^PCI0.I2C4.SRV2 /* \_SB_.PCI0.I2C4.SRV2 */
-                        HRVX = ^^PCI0.I2C4.SAM.DATD /* \_SB_.PCI0.I2C4.SAM_.DATD */
-                        ^^PCI0.I2C4.SAM.SBUF = ^^PCI0.I2C4.VSI2 /* \_SB_.PCI0.I2C4.VSI2 */
-                        SUBX = ^^PCI0.I2C4.SAM.DBUF /* \_SB_.PCI0.I2C4.SAM_.DBUF */
+                        \_SB_.PCI0.I2C4.SAM.SBUF = \_SB_.PCI0.I2C4.SRV2 /* \_SB_.PCI0.I2C4.SRV2 */
+                        HRVX = \_SB_.PCI0.I2C4.SAM.DATD /* \_SB_.PCI0.I2C4.SAM_.DATD */
+                        \_SB_.PCI0.I2C4.SAM.SBUF = \_SB_.PCI0.I2C4.VSI2 /* \_SB_.PCI0.I2C4.VSI2 */
+                        SUBX = \_SB_.PCI0.I2C4.SAM.DBUF /* \_SB_.PCI0.I2C4.SAM_.DBUF */
                         Local0 = LoadTable ("WDSA", "MSHWDS", "ACTABL", "", "", Zero)
                         If ((Local0 != Zero))
                         {
                             P8XH (One, 0xDD)
                             DDBH = ToInteger (Local0)
-                            Notify (^^PCI0.I2C4.BLAD, One) // Device Check
+                            Notify (\_SB_.PCI0.I2C4.BLAD, One) // Device Check
                         }
                     }
                 }

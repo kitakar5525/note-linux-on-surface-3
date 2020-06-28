@@ -13252,7 +13252,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
         }
     }
 
-    Scope (_SB.GPO1)
+    Scope (\_SB.GPO1)
     {
         OperationRegion (OPER, GeneralPurposeIo, Zero, One)
         Name (RES0, ResourceTemplate ()
@@ -13286,7 +13286,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
         }
     }
 
-    Scope (_SB.PCI0.SPI1)
+    Scope (\_SB.PCI0.SPI1)
     {
         Device (NTRG)
         {
@@ -13344,7 +13344,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
         }
     }
 
-    Scope (_SB.PCI0.I2C1)
+    Scope (\_SB.PCI0.I2C1)
     {
         Device (PA01)
         {
@@ -13638,7 +13638,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
         }
     }
 
-    Device (_SB.TPM)
+    Device (\_SB.TPM)
     {
         Method (_HID, 0, NotSerialized)  // _HID: Hardware ID
         {
@@ -13810,7 +13810,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
         }
     }
 
-    Scope (_SB.TPM)
+    Scope (\_SB.TPM)
     {
         OperationRegion (ASMI, SystemIO, SMIA, One)
         Field (ASMI, ByteAcc, NoLock, Preserve)

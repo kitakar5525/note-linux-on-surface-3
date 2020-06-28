@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120913 (538052883)
  */
-DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
+DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
 {
     /*
      * iASL Warning: There were 6 external control methods found during

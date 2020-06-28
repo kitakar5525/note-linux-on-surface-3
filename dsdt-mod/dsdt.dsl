@@ -7275,7 +7275,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
                 CreateDWordField (RBUF, \_SB.PCI0.UOTG._Y1E._BAS, B0BA)  // _BAS: Base Address
                 B0BA = OTG0 /* \OTG0 */
                 CreateDWordField (RBUF, \_SB.PCI0.UOTG._Y1F._BAS, B1BA)  // _BAS: Base Address
-                B1BA = OTG1 /* \_SB_.PCI0.OTG1 */
+                B1BA = \OTG1 /* \OTG1 */
                 Return (RBUF) /* \_SB_.PCI0.UOTG.RBUF */
             }
 
@@ -7305,7 +7305,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072010)
                 PSAT |= Zero
             }
 
-            OperationRegion (KEYS, SystemMemory, OTG1, 0x0100)
+            OperationRegion (KEYS, SystemMemory, \OTG1, 0x0100)
             Field (KEYS, DWordAcc, NoLock, WriteAsZeros)
             {
                 Offset (0x84), 
